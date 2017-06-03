@@ -17,14 +17,19 @@ public class EmployeeService {
   public static List<EmployeeList> getEmployeeList() {
     List<Employee> employeeStub = EmployeeStub.getStubbedEmployees();
     List<EmployeeList> employeeList = new ArrayList<>();
-        employeeStub.stream().forEach(e -> {
-          EmployeeList el = new EmployeeList(e.getName(), e.getEmpId());
-          employeeList.add(el);
-        });
+    for(Employee employee : employeeStub) {
+      EmployeeList el = new EmployeeList(employee.getName(), employee.getEmpId());
+      employeeList.add(el);
+    }
     return employeeList;
   }
 
   public static Employee getEmployeeDetails(Long empId) {
-    return EmployeeStub.getStubbedEmployees().stream().filter(employee -> employee.getEmpId() == empId).findFirst().get();
+    for (Employee employee : EmployeeStub.getStubbedEmployees()) {
+      if(employee.getEmpId() == empId) {
+        return employee;
+      }
+    }
+    return null;
   }
 }

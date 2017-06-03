@@ -3,6 +3,8 @@ package com.deep.gcp.stub;
 import com.deep.gcp.model.Employee;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -38,13 +40,16 @@ public class EmployeeStub {
     for(Employee employee : emp) {
       empList.add(employee);
     }
-    empList.sort((o1, o2) -> {
-      if(o1.getEmpId() > o2.getEmpId())
-        return 1;
-      else if (o1.getEmpId() == o2.getEmpId())
-        return 0;
-      else
-        return -1;
+    Collections.sort(empList, new Comparator<Employee>() {
+
+      @Override public int compare(Employee o1, Employee o2) {
+        if(o1.getEmpId() > o2.getEmpId())
+          return 1;
+        else if (o1.getEmpId() == o2.getEmpId())
+          return 0;
+        else
+          return -1;
+      }
     });
     return empList;
   }
